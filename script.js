@@ -35,9 +35,11 @@ function lightMode() {
 // Switch Theme Dynamically
 function switchTheme(event) {
     if (event.target.checked) {
+        localStorage.setItem('theme', 'dark');
         darkMode();
     }
     else {
+        localStorage.setItem('theme', 'light');
         lightMode();
     }
 };
@@ -46,3 +48,13 @@ function switchTheme(event) {
 
 // Event Listeners
 toggleSwitch.addEventListener('change', switchTheme);
+
+// Check Local Storage For Theme
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+        darkMode();
+    }
+}
